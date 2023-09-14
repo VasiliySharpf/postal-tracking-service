@@ -11,6 +11,8 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     properties:
+      batch_size: 50
+      fetch_size: 50
       hibernate.format_sql: true
       hibernate.default_schema: tracking
     show-sql: false
@@ -20,4 +22,14 @@ spring:
     password: ${spring.datasource.password}
     default-schema: public
     enabled: true
+
+# возможность отключения Spring Security в тестовых целях
+security:
+  enabled: true
+
+jwt:
+  token:
+    secret: ${jwt.token.secret}
+    expired: 3600000
+
 

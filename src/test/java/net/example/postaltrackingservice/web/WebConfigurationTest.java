@@ -1,5 +1,6 @@
 package net.example.postaltrackingservice.web;
 
+import net.example.postaltrackingservice.jwt.JwtTokenProvider;
 import net.example.postaltrackingservice.service.PostOfficeService;
 import net.example.postaltrackingservice.service.PostageEventService;
 import net.example.postaltrackingservice.service.PostalItemService;
@@ -15,6 +16,8 @@ import java.nio.charset.StandardCharsets;
 @TestConfiguration
 public class WebConfigurationTest {
 
+    @MockBean
+    JwtTokenProvider jwtTokenProvider;
     @MockBean
     PostalItemService postalItemService;
     @MockBean

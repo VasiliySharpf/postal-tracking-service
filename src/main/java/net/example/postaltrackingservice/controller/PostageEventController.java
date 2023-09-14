@@ -9,6 +9,7 @@ import net.example.postaltrackingservice.model.dto.PostageEventReadDto;
 import net.example.postaltrackingservice.model.enums.EventType;
 import net.example.postaltrackingservice.service.PostageEventService;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,11 +17,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/postage-event")
 @RequiredArgsConstructor
-public class PostageEventController {
+public class PostageEventController implements AdminController {
 
     private final PostageEventService postageEventService;
 
 
+    @PreAuthorize("hasAuthority('POST_WORKER')")
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
     @Operation(summary = "Регистрации прибытия/выбытия почтового отправления.")
@@ -30,6 +32,7 @@ public class PostageEventController {
         return postageEventService.createPostageEvent(postageEventCreateDto, eventType);
     }
 
+    @PreAuthorize("hasAuthority('POST_WORKER')")
     @PostMapping("/receipt")
     @ResponseStatus(value = HttpStatus.OK)
     @Operation(summary = "Получение почтового отправления адресатом.")
