@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.example.postaltrackingservice.model.dto.PostalItemHistoryDto;
 import net.example.postaltrackingservice.service.ReportService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,10 +18,11 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/report")
 @RequiredArgsConstructor
-public class ReportController {
+public class ReportController implements AdminController {
 
     private final ReportService reportService;
 
+    @PreAuthorize("hasAnyAuthority('POST_WORKER', 'ADMIN', 'USER')")
     @GetMapping("/history/{postalItemID}")
     @Operation(summary = "Статус и история движений почтового отправления.")
     public ResponseEntity<?> getPostalItemHistory(@PathVariable("postalItemID") long id) {

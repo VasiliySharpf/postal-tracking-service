@@ -5,3 +5,7 @@ spring:
   datasource:
     username: test
     password: test
+
+jwt:
+  token:
+    secret: test

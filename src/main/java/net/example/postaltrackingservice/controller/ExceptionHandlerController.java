@@ -7,10 +7,12 @@ import net.example.postaltrackingservice.exception.PostageStatusNotFoundExceptio
 import net.example.postaltrackingservice.exception.PostalItemNotFoundException;
 import net.example.postaltrackingservice.model.dto.ErrorDto;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
 
 
 @Slf4j
@@ -44,6 +46,12 @@ public class ExceptionHandlerController {
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ErrorDto processingException(MethodArgumentNotValidException ex) {
+        return errorMessage(ex);
+    }
+
+    @ResponseStatus(value = HttpStatus.FORBIDDEN)
+    @ExceptionHandler(AccessDeniedException.class)
+    public ErrorDto processingException(AccessDeniedException ex) {
         return errorMessage(ex);
     }
 

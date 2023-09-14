@@ -1,4 +1,4 @@
-# Сервис отслеживания почтовых отправлений
+# REST-сервис отслеживания почтовых отправлений
 ### Список операций, поддерживаемых сервисом:
   - регистрации почтового отправления,
   - его прибытие в промежуточное почтовое отделение,
@@ -11,6 +11,7 @@
 * Spring Boot
 * Spring Web
 * Spring Data JPA (Hibernate)
+* Spring Security (JWT Authentication)
 * Maven
 * Liquibase
 * Validation (Hibernate Validator)

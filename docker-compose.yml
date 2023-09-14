@@ -22,4 +22,5 @@ services:
       spring.datasource.url: jdbc:postgresql://postgres-14/postal_tracking
       spring.datasource.username: postgres
       spring.datasource.password: Pm7xRpwbnUKFQ
+      jwt.token.secret: qBTmv4oXFFR2GwjexDJ4t6fsIUIUhhXqlktXjXdkcyygs8nPVEwMfo29VDRRepYDV
 

@@ -8,6 +8,7 @@ import net.example.postaltrackingservice.model.dto.PostalItemReadDto;
 import net.example.postaltrackingservice.service.PostalItemService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,10 +17,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/postal-item")
 @RequiredArgsConstructor
-public class PostalItemController {
+public class PostalItemController implements AdminController {
 
     private final PostalItemService postalItemService;
 
+    @PreAuthorize("hasAuthority('POST_WORKER')")
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
     @Operation(summary = "Регистрации почтового отправления.")
@@ -28,6 +30,7 @@ public class PostalItemController {
         return postalItemService.registration(postalItemCreateDto);
     }
 
+    @PreAuthorize("hasAuthority('POST_WORKER')")
     @GetMapping("{postalItemID}")
     @Operation(summary = "Получение почтового отправления по идентификатору.")
     public ResponseEntity<?> findById(@PathVariable("postalItemID") long id) {
