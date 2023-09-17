@@ -1,5 +1,6 @@
 package net.example.postaltrackingservice.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import net.example.postaltrackingservice.jwt.JwtRequest;
 import net.example.postaltrackingservice.jwt.JwtResponse;
@@ -17,6 +18,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("login")
+    @Operation(summary = "Аутентификация пользователя по логину и паролю и получение токена авторизации.")
     public JwtResponse login(@RequestBody JwtRequest request) {
         return authService.login(request);
     }

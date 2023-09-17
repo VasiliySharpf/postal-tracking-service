@@ -12,8 +12,11 @@ import java.util.Set;
 
 public record UserDto(@NotBlank
                       String username,
+                      @NotNull
                       String firstName,
+                      @NotNull
                       String lastName,
+                      @NotNull
                       String email,
                       @NotBlank
                       String password,

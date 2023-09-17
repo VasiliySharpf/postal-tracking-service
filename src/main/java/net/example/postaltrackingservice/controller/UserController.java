@@ -1,5 +1,6 @@
 package net.example.postaltrackingservice.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import net.example.postaltrackingservice.model.dto.UserDto;
 import net.example.postaltrackingservice.model.dto.UserReadDto;
@@ -21,12 +22,14 @@ public class UserController implements AdminController {
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
+    @Operation(summary = "Регистрация нового пользователя.")
     public UserReadDto register(@RequestBody @Validated UserDto userDto) {
         return userService.register(userDto);
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("{userId}")
+    @Operation(summary = "Получение пользователя по идентификатору.")
     public ResponseEntity<?> findUserById(@PathVariable long userId) {
         return userService.findById(userId)
                 .map(ResponseEntity::ok)
